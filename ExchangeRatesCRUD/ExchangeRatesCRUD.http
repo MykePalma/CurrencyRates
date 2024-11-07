@@ -1,0 +1,6 @@
+@ExchangeRatesCRUD_HostAddress = http://localhost:5169
+
+GET {{ExchangeRatesCRUD_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
