@@ -43,5 +43,6 @@ And get and API key for AlphaVantage and run rabbitMQ and set the respective hos
 You can run a docker image for rabbitMQ using the following cmd line:
 ```docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management```
 
+ILogger isn't logging to anywhere, but should be considered to be updated in the future to save to a database (SQL server to reuse our service or preferably to a better logging database  like elasticsearch)
 
 The project was build with a test driven development architecture.
