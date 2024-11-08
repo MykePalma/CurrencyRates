@@ -1,10 +1,8 @@
 ﻿
-namespace Services
+namespace Services;
+
+public interface IRabbitMQService
 {
-    public interface IRabbitMQService
-    {
-        ValueTask DisposeAsync();
-        Task InitializeAsync();
-        Task SendMessageAsync(string message);
-    }
+    Task InitializeAsync();
+    Task SendMessageAsync(string message);
 }

@@ -2,8 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Models;
 using Repository.Interfaces;
-using Services;
 using Services.Interfaces;
+
+namespace Services;
 
 public class CurrencyRateService : ICurrencyRateService
 {
@@ -26,8 +27,6 @@ public class CurrencyRateService : ICurrencyRateService
 
     public async Task<CurrencyRate?> GetCurrencyRateAsync(string currencyPair)
     {
-        _logger.LogInformation("Attempting to retrieve currency rate for {CurrencyPair} from the database.", currencyPair);
-
         // Check if the rate exists in the database
         var rate = await _currencyRateRepository.GetRateByPairAsync(currencyPair);
         if (rate != null)

@@ -32,6 +32,7 @@ public class Startup(IConfiguration configuration)
         services.AddScoped<IAlphaVantageConnector, AlphaVantageConnector>();
         services.AddScoped<IRabbitMQService, RabbitMQService>();
     }
+
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())

@@ -1,11 +1,10 @@
-﻿namespace Services;
-
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using System.Text;
-using System.Threading.Tasks;
 
-public class RabbitMQService : IAsyncDisposable, IRabbitMQService
+namespace Services;
+
+public class RabbitMQService : IRabbitMQService
 {
     private IConnection _connection;
     private IChannel _channel;
@@ -23,6 +22,8 @@ public class RabbitMQService : IAsyncDisposable, IRabbitMQService
         };
 
         _queueName = configuration["RabbitMQ:QueueName"];
+
+        InitializeAsync().Wait();
     }
 
     public async Task InitializeAsync()
@@ -34,19 +35,9 @@ public class RabbitMQService : IAsyncDisposable, IRabbitMQService
 
     public async Task SendMessageAsync(string message)
     {
-        await InitializeAsync();
         var body = Encoding.UTF8.GetBytes(message);
 
         await _channel.BasicPublishAsync(exchange: "", routingKey: _queueName, mandatory: false, body: body);
         Console.WriteLine($"[x] Sent {message}");
-        DisposeAsync();
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (_channel != null)
-            await _channel.CloseAsync();
-        if (_connection != null)
-            await _connection.CloseAsync();
     }
 }
