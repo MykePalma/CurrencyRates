@@ -2,7 +2,6 @@
 using Models;
 using Repository.Interfaces;
 
-
 namespace Repository;
 
 public class CurrencyRateRepository : ICurrencyRateRepository
@@ -16,14 +15,12 @@ public class CurrencyRateRepository : ICurrencyRateRepository
 
     public async Task<CurrencyRate?> GetRateByPairAsync(string currencyPair)
     {
-        return await _context.Set<CurrencyRate>()
-                             .FirstOrDefaultAsync(rate => rate.CurrencyPair == currencyPair);
+        return await _context.Set<CurrencyRate>().FirstOrDefaultAsync(rate => rate.CurrencyPair == currencyPair);
     }
 
     public async Task<CurrencyRate?> GetRateByIdAsync(int id)
     {
-        return await _context.Set<CurrencyRate>()
-                             .FirstOrDefaultAsync(rate => rate.Id == id);
+        return await _context.Set<CurrencyRate>().FirstOrDefaultAsync(rate => rate.Id == id);
     }
 
     public async Task AddRateAsync(CurrencyRate currencyRate)
@@ -37,7 +34,6 @@ public class CurrencyRateRepository : ICurrencyRateRepository
     {
         _context.Entry(currencyRate).State = EntityState.Modified;
 
-        // Save changes to the database
         await _context.SaveChangesAsync();
     }
 
